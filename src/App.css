@@ -1,38 +1,93 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a{
+  text-decoration: none;
+  color: #0094FF;
+  font-family: 'Roboto', sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input{
+  font-family: 'Roboto', sans-serif;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body{
+  background-color: #102250;
+}
+.modal{
+  width: 400px;
+  border-radius: 7px;
+  background-color: white;
   display: flex;
   flex-direction: column;
+  padding: 32px 28px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal__title{
+  font-family: Roboto, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 34px;
+  letter-spacing: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 37px;
+}
+.modal-select-counry,
+.modal__pass-input,
+.modal__mail-input,
+.modal__name-input{
+  line-height: 50px;
+  padding-left: 18px;
+  background: #F5F8FA 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  opacity: 1;
+  border: none;
+  margin-bottom: 21px;
+  width: 100%;
+}
+.modal__mail-input{
+  
+}
+.modal__sex-wrap{
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.modal__sex-wrap p:not(:last-child){
+  margin-right: 25px;
+}
+.modal__accept input,
+.modal__sex-wrap input{
+  margin-right: 8px;
+}
+.modal__accept{
+  display: flex;
+  align-items: center;
+  margin-bottom: 37px;
+}
+.modal__button{
+  background: #0094FF 0% 0% no-repeat padding-box;
+  border-radius: 31px;
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 21px;
+  text-align: left;
+  font: normal normal normal 18px/22px Roboto;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  outline: none;
+  border: none;
+  padding: 20px 0;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal__button:hover{
+  cursor: pointer;
+  background-color: #0087e7;
 }
