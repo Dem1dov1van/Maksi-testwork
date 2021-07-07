@@ -1,21 +1,21 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
-a{
+a {
   text-decoration: none;
-  color: #0094FF;
+  color: #0094ff;
   font-family: 'Roboto', sans-serif;
 }
-input{
+input {
   font-family: 'Roboto', sans-serif;
 }
-body{
+body {
   background-color: #102250;
 }
-.modal{
+.modal {
   width: 400px;
   border-radius: 7px;
   background-color: white;
@@ -27,7 +27,7 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.modal__title{
+.modal__title {
   font-family: Roboto, sans-serif;
   font-size: 22px;
   font-weight: bold;
@@ -37,41 +37,67 @@ body{
   justify-content: center;
   margin-bottom: 37px;
 }
-.modal-select-counry,
+.modal__select-country,
 .modal__pass-input,
 .modal__mail-input,
-.modal__name-input{
+.modal__name-input {
   line-height: 50px;
   padding-left: 18px;
-  background: #F5F8FA 0% 0% no-repeat padding-box;
+  background: #f5f8fa 0% 0% no-repeat padding-box;
   border-radius: 8px;
   opacity: 1;
+  position: relative;
   border: none;
-  margin-bottom: 21px;
   width: 100%;
+  /* z-index: -1; */
 }
-.modal__mail-input{
-  
+.modal__pass-input,
+.modal__mail-input {
+  padding-left: 54px;
 }
-.modal__sex-wrap{
+.modal__pass-input-wrapper,
+.modal__name-input-wrapper,
+.modal__mail-input-wrapper {
+  position: relative;
+  margin-bottom: 21px;
+}
+.modal__mail-input-wrapper::before {
+  content: url(mail.svg);
+  position: absolute;
+  z-index: 5;
+  display: block;
+  top: 50%;
+  left: 18px;
+  transform: translate(0, -40%);
+}
+.modal__pass-input-wrapper::before {
+  content: url(/projects/MAKSI-testwork/modal-window/src/pass.svg);
+  position: absolute;
+  z-index: 5;
+  display: block;
+  top: 50%;
+  left: 18px;
+  transform: translate(0, -50%);
+}
+.modal__sex-wrap {
   display: flex;
   align-items: center;
   margin-bottom: 24px;
 }
-.modal__sex-wrap p:not(:last-child){
+.modal__sex-wrap p:not(:last-child) {
   margin-right: 25px;
 }
 .modal__accept input,
-.modal__sex-wrap input{
+.modal__sex-wrap input {
   margin-right: 8px;
 }
-.modal__accept{
+.modal__accept {
   display: flex;
   align-items: center;
   margin-bottom: 37px;
 }
-.modal__button{
-  background: #0094FF 0% 0% no-repeat padding-box;
+.modal__button {
+  background: #0094ff 0% 0% no-repeat padding-box;
   border-radius: 31px;
   width: 100%;
   display: flex;
@@ -82,12 +108,54 @@ body{
   font: normal normal normal 18px/22px Roboto;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   outline: none;
   border: none;
   padding: 20px 0;
 }
-.modal__button:hover{
+.modal__button:hover {
   cursor: pointer;
   background-color: #0087e7;
+}
+
+.select-country:hover {
+  cursor: pointer;
+}
+.select-country::after {
+  content: url(/projects/MAKSI-testwork/modal-window/src/arrow.svg);
+  display: block;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translate(0, -50%);
+  pointer-events: none;
+  transition: .5s all ease;
+}
+.rotate.select-country::after{
+  transform: translate(0, -50%) rotate(180deg);
+}
+.select-country__list {
+  display: none;
+  list-style: none;
+  position: absolute;
+  left: 0;
+  top: 110%;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 8px #00000026;
+  border-radius: 8px;
+  opacity: 1;
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+}
+.visible{
+  display: block;
+}
+.select-country__item{
+  padding: 0 0 0 18px;
+  width: 100%;
+}
+.select-country__item:hover{
+  background: #F5F8FA;
+  cursor: pointer;
 }

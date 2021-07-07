@@ -1,15 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import Country from './components/Country';
 
 function App() {
   return (
     <div className="modal">
       <form action="post">
          <h1 className="modal__title">Create a new account</h1>
-         <input className="modal__name-input" type="text" placeholder="Enter your name"/>
+         <div className="modal__name-input-wrapper">
+          <input className="modal__name-input" type="text" placeholder="Enter your name"/>
+          </div>
+         <div className="modal__mail-input-wrapper">
          <input className="modal__mail-input" type="text" placeholder="Email"/>
+         </div>
+         <div className="modal__pass-input-wrapper">
          <input className="modal__pass-input" type="password" placeholder="Password"/>
-         <div className="modal-select-counry">Latvia</div>
+         </div>
+         <Country />
          <div className="modal__sex-wrap">
             <p><input type="radio" id="M"  value="Male" name="sex"/>Male</p>
             <p><input type="radio" id="F" value="Female" name="sex"/>Female</p>
