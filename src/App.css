@@ -71,7 +71,7 @@ body {
   transform: translate(0, -40%);
 }
 .modal__pass-input-wrapper::before {
-  content: url(/projects/MAKSI-testwork/modal-window/src/pass.svg);
+  content: url(pass.svg);
   position: absolute;
   z-index: 5;
   display: block;
@@ -113,17 +113,29 @@ body {
   border: none;
   padding: 20px 0;
 }
+
 .modal__button:hover {
   cursor: pointer;
   background-color: #0087e7;
 }
-
+.gray{
+  background: #A2A2A2 0% 0% no-repeat padding-box;
+  cursor: initial
+}
+.gray:hover{
+  background: #A2A2A2 0% 0% no-repeat padding-box;
+  cursor: initial
+}
+.select-country{
+  margin-bottom: 28px;
+}
 .select-country:hover {
   cursor: pointer;
 }
 .select-country::after {
-  content: url(/projects/MAKSI-testwork/modal-window/src/arrow.svg);
+  content: url(arrow.svg);
   display: block;
+
   position: absolute;
   right: 20px;
   top: 50%;
@@ -159,3 +171,13 @@ body {
   background: #F5F8FA;
   cursor: pointer;
 }
+.error-message{
+  text-align: left;
+  font: normal normal normal 10px/13px Roboto;
+  letter-spacing: 0px;
+  color: #E82828;
+  position: absolute;
+  bottom: -15px;
+  left: 20px;
+}
+

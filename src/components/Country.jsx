@@ -1,8 +1,7 @@
 import React from 'react'
+import CountryPopup from './CountryPopup';
 
-function Country() {
-
-   const countries = ['Latvia', 'Russia', 'Riga', 'America', 'Spain', 'Italy', 'Uganda']
+function Country({ countries }) {
 
    const [chooseCountry, setCountry] = React.useState(countries[0])
 
@@ -16,21 +15,10 @@ function Country() {
    return (
       <div className="modal__select-country select-country" onClick={()=> visibleList()} >
          {chooseCountry}
-         <ul className='select-country__list'>
-            {
-            countries.map(((item, index) => {
-               return(
-                  <li 
-                     key={index} 
-                     className='select-country__item' 
-                     onClick={() =>setCountry(item)}
-                  >
-                     {item}
-                  </li>
-               )
-            }))
-            }
-         </ul>
+         <CountryPopup 
+            setCountry={setCountry}
+            countries={countries}
+         />
       </div>
    )
 }
