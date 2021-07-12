@@ -8,33 +8,34 @@ import Accept from './components/Accept';
 
 function App() {
     const countries = ['Latvia', 'Russia', 'Riga', 'America', 'Spain', 'Italy', 'Uganda']
-    const [possibleSubmit, setPossibleSubmit] = React.useState(true)
     const [name, setName] = React.useState('')
     const [mail, setMail] = React.useState(null)
     const [pass, setPass] = React.useState(null)
+    const [choosenCountry, setCountry] = React.useState(null)
+    
     const [radio, setRadio] = React.useState(null)
     const [accept, setAccept] = React.useState(null)
+
     const [isInvalidName, setInvalidName] = React.useState(false)
     const [isInvalidMail, setInvalidMail] = React.useState(false)
     const [isInvalidPass, setInvalidPass] = React.useState(false)
+    const [isInvalidCountry, setInvalidCountry] = React.useState(false)
     const [isInvalidSex, setInvalidSex] = React.useState(false)
     const [isInvalidAccept, setInvalidAccept] = React.useState(false)
-   const onClickSubmit = () =>{
+    console.log(isInvalidCountry, isInvalidName, isInvalidMail, isInvalidPass, isInvalidAccept);
+    const validation = () =>{
       if(/^[a-zA-Z]+$/.test(name) === true){
          setInvalidName(false)
-         console.log(name);
       }else{
          setInvalidName(true)
       }
       if(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(mail) === true){
          setInvalidMail(false)
-         console.log(mail);
       }else{
          setInvalidMail(true)
       }
       if(pass && pass.length > 5){
          setInvalidPass(false)
-         console.log(pass);
       }else{
          setInvalidPass(true)
       }
@@ -43,10 +44,28 @@ function App() {
       }else{
          setInvalidSex(true)
       }
+      if(choosenCountry){
+         setInvalidCountry(false)
+      }else{
+         setInvalidCountry(true)
+      }
       if(accept){
          setInvalidAccept(false)
       }else{
          setInvalidAccept(true)
+      }
+    }
+   const onClickSubmit = () =>{
+      validation()
+      if(!isInvalidMail && !isInvalidPass && !isInvalidCountry && !isInvalidSex && !isInvalidAccept){
+         const userObj = {
+            name,
+            mail,
+            pass,
+            country: choosenCountry,
+            gender: radio
+         }
+         console.log(userObj);
       }
    }
   return (
@@ -77,8 +96,11 @@ function App() {
             isInvalid={isInvalidPass}
          />
          <Country 
+            choosenCountry={choosenCountry}
+            setCountry={setCountry}
             countries={countries}
-            errorMessage={"You must select your country"}/>
+            isInvalid={isInvalidCountry}
+            errorMessage="You must select your country"/>
          <Sex 
             errorMessage='You must select the gender'
             isInvalid={isInvalidSex}
@@ -89,8 +111,9 @@ function App() {
             errorMessage="You must accept the policies"
             onChange ={setAccept}/>
          <Button 
-            possibleSubmit={possibleSubmit}
-            onClick={onClickSubmit}/>
+            onClick={onClickSubmit}
+            disabled={name && mail && pass && radio && accept}/>
+            
       </form>
    </div>
   );

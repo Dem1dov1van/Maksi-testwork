@@ -55,6 +55,7 @@ body {
 .modal__mail-input {
   padding-left: 54px;
 }
+.modal__select-country,
 .modal__accept,
 .modal__sex-wrap,
 .modal__pass-input-wrapper,

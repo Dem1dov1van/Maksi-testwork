@@ -1,12 +1,11 @@
 import React from 'react'
 
-function Button({ possibleSubmit, onClick }) {
+function Button({ onClick, disabled }) {
    return (
-    // <p className={`paragraph ${!isValid && 'paragraph--error'}`></p>
     <button 
-    className={`modal__button ${!possibleSubmit ? 'gray' : ''}`} 
+    className={`modal__button ${!disabled ? 'gray' : ''}`} 
     type="button"
-   //  disabled={possibleSubmit}
+    disabled={!disabled}
     onClick={()=>onClick()}
     >Sign up</button>
    )
