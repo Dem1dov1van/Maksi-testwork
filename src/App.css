@@ -55,11 +55,13 @@ body {
 .modal__mail-input {
   padding-left: 54px;
 }
+.modal__accept,
+.modal__sex-wrap,
 .modal__pass-input-wrapper,
 .modal__name-input-wrapper,
 .modal__mail-input-wrapper {
   position: relative;
-  margin-bottom: 21px;
+  margin-bottom: 29px;
 }
 .modal__mail-input-wrapper::before {
   content: url(mail.svg);
@@ -82,7 +84,6 @@ body {
 .modal__sex-wrap {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
 }
 .modal__sex-wrap p:not(:last-child) {
   margin-right: 25px;
@@ -120,7 +121,8 @@ body {
 }
 .gray{
   background: #A2A2A2 0% 0% no-repeat padding-box;
-  cursor: initial
+  cursor: initial;
+  pointer-events: none;
 }
 .gray:hover{
   background: #A2A2A2 0% 0% no-repeat padding-box;
@@ -162,6 +164,7 @@ body {
 }
 .visible{
   display: block;
+  z-index: 1;
 }
 .select-country__item{
   padding: 0 0 0 18px;

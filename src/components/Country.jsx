@@ -3,7 +3,7 @@ import CountryPopup from './CountryPopup';
 
 function Country({ countries }) {
 
-   const [chooseCountry, setCountry] = React.useState(countries[0])
+   const [chooseCountry, setCountry] = React.useState('Select country')
 
    const visibleList = () =>{
       let list = document.querySelector('.select-country__list')
