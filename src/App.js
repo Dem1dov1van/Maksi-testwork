@@ -28,6 +28,7 @@ function App() {
    const [isGenderValid, setIsGenderValid] = React.useState(true)
 
    const [accept, setAccept] = React.useState(null)
+   const [isLoading, setIsLoading] = React.useState(false)
 
    const onChangeNameHandler = value => {
       if(/^[a-zA-Z]+$/.test(value)) {
@@ -62,18 +63,32 @@ function App() {
 
    const onSubmitHandler = () => {
       !country && setIsValidCountry(!isValidCountry)
+      setIsLoading(true)
+      const timeout = setTimeout(() => {
+         setIsLoading(false)
+         clearTimeout(timeout)
+
+         console.log({
+            name, 
+            email, 
+            password, 
+            country, 
+            gender: gender, 
+            accept: accept
+         })
+
+      }, 10000);
+
    }
 
    const onChangeGenderHandler = (val) => {
       setGender(val)
-      console.log('val', val)
       setGenderDirty(true)
    }
 
    const setAcceptHandler = (val) => {
       setAccept(val)
    }
-
 
   return (
      
@@ -127,6 +142,7 @@ function App() {
             onChange ={setAcceptHandler}/>
          <Button 
             onClick={onSubmitHandler}
+            isLoading={isLoading}
             disabled={
                !(isNameValid && nameDirty) || 
                !(isEmailValid && emailDirty) ||
