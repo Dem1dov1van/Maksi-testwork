@@ -3,20 +3,14 @@ import CountryPopup from './CountryPopup';
 
 function Country({ countries, choosenCountry, setCountry, errorMessage, isInvalid }) {
 
-   
-
-   const visibleList = () =>{
-      let list = document.querySelector('.select-country__list')
-      list.classList.toggle('visible')
-      let elem = document.querySelector('.select-country')
-      elem.classList.toggle('rotate')
-   }
+   const [visiblePopup, setVisiblePopup] = React.useState(false)
 
    return (
-      <div className="modal__select-country select-country" 
-         onClick={()=> visibleList()} >
+      <div className={`modal__select-country select-country ${!visiblePopup ? 'rotate' : ''}`}
+         onClick={()=> setVisiblePopup(!visiblePopup)} >
          {choosenCountry ? choosenCountry : 'Select country'}
          <CountryPopup 
+            visiblePopup={visiblePopup}
             setCountry={setCountry}
             countries={countries}
          />

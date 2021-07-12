@@ -8,13 +8,15 @@ import Accept from './components/Accept';
 
 function App() {
     const countries = ['Latvia', 'Russia', 'Riga', 'America', 'Spain', 'Italy', 'Uganda']
+
     const [name, setName] = React.useState('')
     const [mail, setMail] = React.useState(null)
     const [pass, setPass] = React.useState(null)
     const [choosenCountry, setCountry] = React.useState(null)
-    
     const [radio, setRadio] = React.useState(null)
     const [accept, setAccept] = React.useState(null)
+
+    const [loading, setLoading] = React.useState(false)
 
     const [isInvalidName, setInvalidName] = React.useState(false)
     const [isInvalidMail, setInvalidMail] = React.useState(false)
@@ -22,12 +24,13 @@ function App() {
     const [isInvalidCountry, setInvalidCountry] = React.useState(false)
     const [isInvalidSex, setInvalidSex] = React.useState(false)
     const [isInvalidAccept, setInvalidAccept] = React.useState(false)
-    console.log(isInvalidCountry, isInvalidName, isInvalidMail, isInvalidPass, isInvalidAccept);
     const validation = () =>{
       if(/^[a-zA-Z]+$/.test(name) === true){
          setInvalidName(false)
+         console.log('верное имя');
       }else{
          setInvalidName(true)
+         console.log('неверное имя');
       }
       if(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(mail) === true){
          setInvalidMail(false)
@@ -55,9 +58,10 @@ function App() {
          setInvalidAccept(true)
       }
     }
-   const onClickSubmit = () =>{
-      validation()
-      if(!isInvalidMail && !isInvalidPass && !isInvalidCountry && !isInvalidSex && !isInvalidAccept){
+   //  let promise = validation().then(timeOutLoading, console.log('неверные данные'));
+    const timeOutLoading = () => {
+       console.log(!isInvalidName, !isInvalidMail, !isInvalidPass, !isInvalidCountry, !isInvalidSex, !isInvalidAccept);
+      if((!isInvalidMail) && (!isInvalidPass) && (!isInvalidCountry) && (!isInvalidSex) && (!isInvalidAccept)){
          const userObj = {
             name,
             mail,
@@ -66,7 +70,15 @@ function App() {
             gender: radio
          }
          console.log(userObj);
+      }else{
+         console.log('неверные данные');
       }
+      setLoading(false)
+    }
+   const onClickSubmit = () =>{
+      validation()
+      setLoading(true)
+      setTimeout(timeOutLoading, 1000)
    }
   return (
      
@@ -111,6 +123,7 @@ function App() {
             errorMessage="You must accept the policies"
             onChange ={setAccept}/>
          <Button 
+            loading={loading}
             onClick={onClickSubmit}
             disabled={name && mail && pass && radio && accept}/>
             

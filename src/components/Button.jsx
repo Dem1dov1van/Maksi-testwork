@@ -1,14 +1,17 @@
 import React from 'react'
 
-function Button({ onClick, disabled }) {
-   return (
-    <button 
+function Button({ onClick, disabled, loading }) {
+
+   
+
+   return (<>
+   <button 
     className={`modal__button ${!disabled ? 'gray' : ''}`} 
     type="button"
     disabled={!disabled}
     onClick={()=>onClick()}
-    >Sign up</button>
-   )
+    >{loading ? <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>: 'Sign up'}</button>
+   </>)
 }
 
 export default Button
