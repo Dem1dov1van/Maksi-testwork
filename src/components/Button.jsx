@@ -3,9 +3,9 @@ import React from 'react'
 function Button({ onClick, disabled }) {
    return (
     <button 
-    className={`modal__button ${!disabled ? 'gray' : ''}`} 
+    className={`modal__button ${disabled ? 'gray' : ''}`} 
     type="button"
-    disabled={!disabled}
+    disabled={disabled}
     onClick={()=>onClick()}
     >Sign up</button>
    )

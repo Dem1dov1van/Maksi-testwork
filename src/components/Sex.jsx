@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Sex({ errorMessage, isInvalid, haveValue }) {
+function Sex({ errorMessage, isValid, value, onChange }) {
    return (
     <div className="modal__sex-wrap">
-        <p><input type="radio" id="M" onChange={()=>haveValue('Male')}  value="Male" name="sex"/>Male</p>
-        <p><input type="radio" id="F" onChange={()=>haveValue('Female')} value="Female" name="sex"/>Female</p>
-        {isInvalid && <p className="error-message">{errorMessage}</p>}
+        <p><input type="radio" id="M" onChange={()=>onChange('Male')}  value={value} name="sex"/>Male</p>
+        <p><input type="radio" id="F" onChange={()=>onChange('Female')} value={value} name="sex"/>Female</p>
+        {isValid && <p className="error-message">{errorMessage}</p>}
     </div>
    )
 }

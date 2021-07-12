@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Accept({ onChange, errorMessage, isInvalid }) {
+function Accept({ onChange, errorMessage, isValid = true }) {
 
    return (
     <div className="modal__accept">
         <input type="checkbox" id="accept" onChange={(e)=>onChange(e.target.checked)} />
         <label htmlFor="accept"> Accept <a href="/">terms</a> and <a href="/">conditions</a></label>
-        {isInvalid && <p className="error-message">{errorMessage}</p>}
+        {!isValid && <p className="error-message">{errorMessage}</p>}
     </div>
    )
 }

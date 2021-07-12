@@ -1,16 +1,15 @@
 import React from 'react'
 
-function CountryPopup({ countries, setCountry}) {
+function CountryPopup({ countries, setCountry, showOptions}) {
 
    return (
-    <ul className='select-country__list'>
+    <ul className={`select-country__list ${showOptions && 'visible'}`}>
         {countries && countries.map(((item, index) => {
             return(
                 <li 
                     key={index} 
                     className='select-country__item' 
                     onClick={() => setCountry(item)}
-                    
                 >
                     {item}
                 </li>
