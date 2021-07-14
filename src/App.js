@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css';
-import Country from './components/Country';
+import Select from './components/Select';
 import Button from './components/Button';
 import Input from './components/Input';
 import Sex from './components/Sex';
@@ -9,7 +9,7 @@ import Accept from './components/Accept';
 function App() {
     const countries = ['Latvia', 'Russia', 'Riga', 'America', 'Spain', 'Italy', 'Uganda']
 
-    const [name, setName] = React.useState('')
+    const [name, setName] = React.useState(null)
     const [mail, setMail] = React.useState(null)
     const [pass, setPass] = React.useState(null)
     const [choosenCountry, setCountry] = React.useState(null)
@@ -24,64 +24,52 @@ function App() {
     const [isInvalidCountry, setInvalidCountry] = React.useState(false)
     const [isInvalidSex, setInvalidSex] = React.useState(false)
     const [isInvalidAccept, setInvalidAccept] = React.useState(false)
-    const validation = () =>{
+
+   const validationName = () => {
       if(/^[a-zA-Z]+$/.test(name) === true){
          setInvalidName(false)
-         console.log('верное имя');
       }else{
          setInvalidName(true)
-         console.log('неверное имя');
       }
+   }
+   const validationMail = () => {
       if(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(mail) === true){
          setInvalidMail(false)
       }else{
          setInvalidMail(true)
       }
+   }
+   const validationPass = () => {
       if(pass && pass.length > 5){
          setInvalidPass(false)
       }else{
          setInvalidPass(true)
       }
-      if(radio){
-         setInvalidSex(false);
-      }else{
-         setInvalidSex(true)
-      }
-      if(choosenCountry){
-         setInvalidCountry(false)
-      }else{
-         setInvalidCountry(true)
-      }
-      if(accept){
-         setInvalidAccept(false)
-      }else{
-         setInvalidAccept(true)
-      }
-    }
-   //  let promise = validation().then(timeOutLoading, console.log('неверные данные'));
-    const timeOutLoading = () => {
-       console.log(!isInvalidName, !isInvalidMail, !isInvalidPass, !isInvalidCountry, !isInvalidSex, !isInvalidAccept);
-      if((!isInvalidMail) && (!isInvalidPass) && (!isInvalidCountry) && (!isInvalidSex) && (!isInvalidAccept)){
-         const userObj = {
-            name,
-            mail,
-            pass,
-            country: choosenCountry,
-            gender: radio
-         }
-         console.log(userObj);
-      }else{
-         console.log('неверные данные');
-      }
-      setLoading(false)
-    }
-   const onClickSubmit = () =>{
-      validation()
-      setLoading(true)
-      setTimeout(timeOutLoading, 1000)
    }
+   const createObj = () => {
+      const userObj = {
+         name,
+         mail,
+         pass,
+         country: choosenCountry,
+         gender: radio
+      }
+      console.log(userObj);
+      setLoading(false)
+   }
+   const onClickSubmit = () =>{
+      if((!isInvalidMail) && (!isInvalidPass) && choosenCountry && (!isInvalidSex) && (!isInvalidAccept) && (!isInvalidName)){
+         setLoading(true)
+         setTimeout(createObj, 10000)
+      }else{
+         if(!choosenCountry){
+            setInvalidCountry(true)
+         }
+         console.log('Данные не корректны');
+      }
+   }
+
   return (
-     
     <div className="modal">
       <form action="post">
          <h1 className="modal__title">Create a new account</h1>
@@ -90,7 +78,9 @@ function App() {
             errorMessage="Please enter a valid name"
             classNameForInput="modal__name-input"
             haveValue={setName}
+            setInvalid={setInvalidName}
             isInvalid={isInvalidName}
+            validation={validationName}
          />
          <Input 
             label="Mail"
@@ -98,6 +88,8 @@ function App() {
             classNameForInput="modal__mail-input"
             haveValue={setMail}
             isInvalid={isInvalidMail}
+            setInvalid={setInvalidMail}
+            validation={validationMail}
          />
          <Input 
             label="Password"
@@ -106,27 +98,30 @@ function App() {
             type='password'
             haveValue={setPass}
             isInvalid={isInvalidPass}
+            setInvalid={setInvalidPass}
+            validation={validationPass}
          />
-         <Country 
+         <Select 
+            errorMessage="You must select your country"
             choosenCountry={choosenCountry}
             setCountry={setCountry}
             countries={countries}
             isInvalid={isInvalidCountry}
-            errorMessage="You must select your country"/>
+            setInvalid={setInvalidCountry}
+         />
          <Sex 
             errorMessage='You must select the gender'
             isInvalid={isInvalidSex}
             haveValue={setRadio}/>
          <Accept 
+            errorMessage="You must accept the policies"
             haveValue={setAccept}
             isInvalid={isInvalidAccept}
-            errorMessage="You must accept the policies"
             onChange ={setAccept}/>
          <Button 
             loading={loading}
             onClick={onClickSubmit}
             disabled={name && mail && pass && radio && accept}/>
-            
       </form>
    </div>
   );
